@@ -594,19 +594,25 @@ Synapse can be connected with data lake without creating any key as we did befor
 Now go to your data lake in your resource group to IAM , to add role assignment
 
 ![image](https://github.com/user-attachments/assets/f566c11e-2172-4aec-af03-95e1b32e826b)
-
+![image](https://github.com/user-attachments/assets/3b97dd54-af8b-42b5-97bf-647be7814426)
 
 Now go to your synapse workspace and create a SQL script
+![image](https://github.com/user-attachments/assets/cc1d9aa9-ed73-489f-920a-bde7e6b4c17e)
 
 Now let’s create the sql db first
+![image](https://github.com/user-attachments/assets/0f81e8b2-a77e-428a-a314-b5d0e9ecb133)
 
 
 Now we’ll choose serverless , since our data resides in the lakehouse and not physically in any database . cost is less when you store data in lakehouse .
+![image](https://github.com/user-attachments/assets/877f1144-35c7-4210-bd17-2fc7918efe55)
 
 
 Now got to your sql script , under use database dropdown you’ve option fot your newly created db ie awdatabase
+![image](https://github.com/user-attachments/assets/171710a8-5ea2-45c2-8845-2b9af8074dc6)
+
 
 Provide access to yourself in data lakehouse storage , to access the data , IAM -> ADD ROLE ->  search storage blob data contributor
+![image](https://github.com/user-attachments/assets/4d85cf4e-4fa5-4220-9e4b-a1a32c961197)
 
 ### 🔹 Querying Data in Synapse
 
@@ -614,22 +620,27 @@ Provide access to yourself in data lakehouse storage , to access the data , IAM 
 1. Use `OPENROWSET` to read Parquet data from **Silver Layer**.
 
 OPENROWSET function in our sql script
-
-
 To get the link of your data file go to your datalake storage -> silver
+![image](https://github.com/user-attachments/assets/d547afc4-1c17-4434-9cc4-0504a1a03a74)
+![image](https://github.com/user-attachments/assets/7e34b73d-423c-4011-84d2-a717d3584173)
 
 
 We need not copy the entire url , only till folder name is required
+![image](https://github.com/user-attachments/assets/a8941e3d-23f3-45bf-8a9e-0e81c0d6d9f6)
 
 
 Here in the link it says blob.core , but we’re using datalake , so we’ve to change it to dfs (data file storage)
+![image](https://github.com/user-attachments/assets/c8c79f94-2604-485b-a419-983849beb5d1)
 
 With the help openrowset function you can return the parquet data asa tabular format
+![image](https://github.com/user-attachments/assets/5a06e4cd-d2ac-4cfd-a2d7-f40046f68c98)
+![image](https://github.com/user-attachments/assets/1e498012-7904-4954-ae5c-1660437a6324)
 
 2.. Create **views** for frequently accessed datasets.
 
-
 Similarly create views for all the datafiles
+![image](https://github.com/user-attachments/assets/4609d44e-6196-419a-b40d-aace51626622)
+![image](https://github.com/user-attachments/assets/cb9ca0aa-1dff-4527-b5a4-1a81c430a36f)
 
 
 📌 *Screenshot: Querying Data in Synapse SQL Pool*
@@ -654,37 +665,35 @@ we’ve to create external tables in synapse, it involves 3 steps : - credential
 
 
 Create a new sql script - Create External Table
-
-
-
-
+![image](https://github.com/user-attachments/assets/11bb2499-ab22-4c31-9546-980c0c7a614a)
 
 Firstly we’ll have to create a master key
-
-
-
+![image](https://github.com/user-attachments/assets/d30e9699-cbf7-4250-926a-f00d19914429)
 
 Create database scoped credential ( from microsoft documentation refer the code)
 
-
-
+![image](https://github.com/user-attachments/assets/71b0aafe-2533-4acd-a6d5-50b8ec93e17b)
 
 Now let’s create the external datasource , we’ll have 2 creat 2 of them since we need to read data from silver , and push data to gold
-
-
-
-
+![image](https://github.com/user-attachments/assets/cc0f5927-cf65-4b24-8451-c336e0d96a58)
+![image](https://github.com/user-attachments/assets/0820ef3b-74c8-45f7-9beb-aace6816924f)
+![image](https://github.com/user-attachments/assets/0df3494c-773a-444e-9a89-4365e2243ad5)
 
 
 
 
 Now let’s go to 3rd step ie create external file format
+![image](https://github.com/user-attachments/assets/9ff5eccd-71be-4110-8b5c-ac442e8840a2)
 
 
 
 
 Now that we’ve created a view on silver , we’ll push the data from silver to gold to crete an external table using CETAS (Create External Table As)
 
+![image](https://github.com/user-attachments/assets/a6e68f4d-9ec1-4cec-8d18-2ae36ac48d26)
+![image](https://github.com/user-attachments/assets/176b5e72-a7fe-4e96-a687-08b197e7e24b)
+![image](https://github.com/user-attachments/assets/89ab4802-83b0-45f5-8588-b16d7b7ad198)
+![image](https://github.com/user-attachments/assets/9820e96c-d3c0-4e36-872b-520cc96c5666)
 
 
 
@@ -696,6 +705,8 @@ Now that we’ve created a view on silver , we’ll push the data from silver to
 
 When we create External table , it is actually being stored in our datalake
 
+![image](https://github.com/user-attachments/assets/f7518fd5-d7e9-4cde-afd4-983cb9bb3fa8)
+![image](https://github.com/user-attachments/assets/6b1e3e23-207f-4abd-b265-654003d89b1a)
 
 
 
@@ -716,6 +727,8 @@ When we create External table , it is actually being stored in our datalake
 1. Retrieve **SQL Endpoint** from Synapse.
 
 Now we got to establish conncection between synapse and PowerBI, For that we require sql endpoints
+![image](https://github.com/user-attachments/assets/727d39ff-3830-429b-9e99-9a35b2d6aa25)
+![image](https://github.com/user-attachments/assets/247e5f65-639a-4fef-a502-7ac46a449bfc)
 
 
 
@@ -726,6 +739,7 @@ Now copy that endpoint and go to powerbi -> get data
 
 
 2. Open **Power BI → Get Data**.
+![image](https://github.com/user-attachments/assets/87503706-ae40-4afb-886a-5c5e45ff49ef)
 
 
 
@@ -734,6 +748,8 @@ Now copy that endpoint and go to powerbi -> get data
 3. Paste the **SQL Endpoint** to establish a connection.
 
 Paste the sql endpoint
+![image](https://github.com/user-attachments/assets/24393728-ac7d-4a96-9420-94adb31bebda)
+![image](https://github.com/user-attachments/assets/1d8cf370-0c12-4195-8343-8663af2e886b)
 
 
 
@@ -741,6 +757,7 @@ Paste the sql endpoint
 
 
 4. Build **dashboards and reports**.
+![image](https://github.com/user-attachments/assets/9cf495cd-1e64-40fe-b26c-139fac49f737)
 
 
 
